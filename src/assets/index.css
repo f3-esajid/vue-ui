@@ -1,0 +1,119 @@
+:root {
+  --layer-0: 229 100% 98%;
+  --layer-1: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 3.9%;
+  --primary: 243 75% 59%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 240 4.8% 95.9%;
+  --secondary-foreground: 240 5.9% 10%;
+  --muted: 240 49.8% 95.9%;
+  --muted-foreground: 240 4% 46%;
+  --accent: 0 0% 98%;
+  --accent-foreground: 240 5% 34%;
+  --positive: 142 71% 45%;
+  --positive-foreground: 0 0% 100%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --warning: 59 100% 40%;
+  --warning-foreground: 20 90% 9%;
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --ring: 243 75% 59%;
+  --radius: 0.5rem;
+  --vis-tooltip-background-color: none !important;
+  --vis-tooltip-border-color: none !important;
+  --vis-tooltip-text-color: none !important;
+  --vis-tooltip-shadow-color: none !important;
+  --vis-tooltip-backdrop-filter: none !important;
+  --vis-tooltip-padding: none !important;
+
+  --vis-primary-color: var(--primary);
+  --vis-secondary-color: var(--secondary);
+  --vis-text-color: var(--muted-foreground);
+
+  --ai-primary: 172 68% 44%;
+  --ai-primary-foreground: 172 68% 95%;
+  --ai-secondary: 172 68% 64%;
+  --ai-secondary-foreground: 172 68% 20%;
+  --ai-tertiary: 172 68% 28%;
+  --ai-tertiary-foreground: 172 68% 90%;
+}
+
+.dark {
+  --layer-0: 217 19% 13%;
+  --layer-1: 220 10% 12%;
+  --foreground: 0 0% 80%;
+  --card: 220 10% 12%;
+  --card-foreground: 0 0% 80%;
+  --popover: 0 0% 9%;
+  --popover-foreground: 0 0% 95%;
+  --primary: 243 75% 59%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 201 10% 35%;
+  --muted-foreground: 240 5% 64.9%;
+  --accent: 12 6.5% 15.1%;
+  --accent-foreground: 0 0% 98%;
+  --positive: 142 71% 45%;
+  --positive-foreground: 0 0% 100%;
+  --destructive: 0 52.8% 50.6%;
+  --destructive-foreground: 0 85.7% 97.3%;
+  --warning: 59 75% 75%;
+  --warning-foreground: 20 90% 9%;
+  --border: 12 6.5% 30%;
+  --input: 240 3.7% 15.9%;
+  --ring: 142.4 71.8% 29.2%;
+  --radius: 0.5rem;
+  color-scheme: dark;
+
+  --ai-primary:  172 68% 44%;
+  --ai-primary-foreground: 172 68% 95%;
+  --ai-secondary: 172 68% 28%;
+  --ai-secondary-foreground: 172 68% 90%;
+  --ai-tertiary: 172 68% 64%;
+  --ai-tertiary-foreground: 172 68% 20%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-layer-0 text-foreground;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    @apply bg-primary/10;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.animate-fadeOut {
+  animation: fadeOut 5s ease-in-out forwards;
+}
+
+.prose p {
+  @apply m-0;
+}
+
+.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: #adb5bd;
+  pointer-events: none;
+  height: 0;
+  font-size: 0.875rem;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

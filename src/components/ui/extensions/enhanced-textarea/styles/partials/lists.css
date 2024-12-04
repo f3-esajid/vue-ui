@@ -1,0 +1,41 @@
+.minimal-tiptap-editor .ProseMirror ol {
+  @apply list-decimal;
+}
+
+.minimal-tiptap-editor .ProseMirror ol ol {
+  list-style: lower-alpha;
+}
+
+.minimal-tiptap-editor .ProseMirror ol ol ol {
+  list-style: lower-roman;
+}
+
+.minimal-tiptap-editor .ProseMirror ul {
+  list-style: disc;
+}
+
+.minimal-tiptap-editor .ProseMirror ul ul {
+  list-style: circle;
+}
+
+.minimal-tiptap-editor .ProseMirror ul ul ul {
+  list-style: square;
+}
+
+.minimal-tiptap-editor ul[data-type='taskList'] {
+  list-style-type: none;
+  padding-left: 0px !important;
+}
+
+.minimal-tiptap-editor ul[data-type='taskList'] li {
+  display: flex;
+}
+.minimal-tiptap-editor ul[data-type='taskList'] label {
+  @apply mr-3
+}
+
+.minimal-tiptap-editor .task-list-item {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+}

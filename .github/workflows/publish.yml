@@ -1,0 +1,63 @@
+name: Publish Package
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          registry-url: https://npm.pkg.github.com/
+
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Extract Branch Name
+        id: branch
+        run: echo "BRANCH_NAME=${GITHUB_REF##*/}" >> $GITHUB_ENV
+
+      - name: Build Package
+        run: yarn run build
+
+      - name: Configure Default GitHub Identity
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+
+      - name: Publish to GitHub Packages
+        run: |
+          # Replace '/' with '-' in branch names to avoid invalid version strings
+          BRANCH_NAME=$(echo $BRANCH_NAME | sed 's/\//-/g')
+          # Dynamically fetch package name and version from package.json
+          PACKAGE_NAME=$(jq -r .name package.json) # Get the package name
+          BASE_VERSION=$(jq -r .version package.json) # Get the base version
+          REGISTRY_URL="https://npm.pkg.github.com"
+
+          # Fetch existing versions
+          echo "Fetching existing versions..."
+          EXISTING_VERSIONS=$(npm show $PACKAGE_NAME versions --registry=$REGISTRY_URL 2>/dev/null || echo "[]")
+          echo "Existing versions: $EXISTING_VERSIONS"
+
+          # Calculate next version
+          if [[ $EXISTING_VERSIONS == *"$BASE_VERSION-$BRANCH_NAME"* ]]; then
+            echo "Branch version exists; calculating next version..."
+            NEXT_NUM=$(echo $EXISTING_VERSIONS | grep -oE "$BASE_VERSION-$BRANCH_NAME.[0-9]+" | awk -F'.' '{print $NF}' | sort -n | tail -n1)
+            NEXT_VERSION="$BASE_VERSION-$BRANCH_NAME.$((NEXT_NUM + 1))"
+          else
+            echo "Branch version does not exist; using initial version..."
+            NEXT_VERSION="$BASE_VERSION-$BRANCH_NAME.1"
+          fi
+          echo "Next version: $NEXT_VERSION"
+
+          # Publish the package
+          yarn publish --new-version $NEXT_VERSION
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

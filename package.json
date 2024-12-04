@@ -1,0 +1,81 @@
+{
+    "name": "@f3-esajid/vue-ui",
+    "private": true,
+    "version": "0.0.1",
+    "type": "module",
+    "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+    "scripts": {
+        "dev": "vite",
+        "build": "vue-tsc && vite build",
+        "preview": "vite preview",
+        "build:watch": "yarn build -m development --watch"
+    },
+    "files": [
+        "dist"
+    ],
+    "main": "./dist/vue-ui.umd.cjs",
+    "module": "./dist/vue-ui.js",
+    "exports": {
+        ".": {
+            "import": "./dist/vue-ui.js",
+            "require": "./dist/vue-ui.umd.cjs"
+        },
+        "./dist/style.css": {
+            "import": "./dist/style.css",
+            "require": "./dist/style.css"
+        },
+        "./dist/tailwind.config.js": {
+            "import": "./tailwind.config.js",
+            "require": "./tailwind.config.js"
+        }
+    },
+    "dependencies": {
+        "@internationalized/date": "^3.5.2",
+        "@tiptap/core": "^2.6.6",
+        "@tiptap/extension-code-block-lowlight": "^2.9.1",
+        "@tiptap/extension-color": "^2.9.1",
+        "@tiptap/extension-link": "^2.9.1",
+        "@tiptap/extension-mention": "^2.6.6",
+        "@tiptap/extension-placeholder": "^2.9.1",
+        "@tiptap/extension-task-item": "^2.9.1",
+        "@tiptap/extension-task-list": "^2.9.1",
+        "@tiptap/extension-typography": "^2.9.1",
+        "@tiptap/extension-underline": "^2.9.1",
+        "@tiptap/pm": "^2.6.6",
+        "@tiptap/starter-kit": "^2.6.6",
+        "@tiptap/suggestion": "^2.6.6",
+        "@tiptap/vue-3": "^2.6.6",
+        "@unovis/ts": "^1.4.3-beta.0",
+        "@unovis/vue": "^1.4.3-beta.0",
+        "@vee-validate/zod": "^4.12.8",
+        "@vueuse/core": "^11.1.0",
+        "class-variance-authority": "^0.7.0",
+        "clsx": "^2.1.1",
+        "lowlight": "^3.1.0",
+        "lucide-vue-next": "^0.400.0",
+        "radix-vue": "^1.7.4",
+        "tailwind-merge": "^2.3.0",
+        "tailwindcss-animate": "^1.0.7",
+        "tiptap-markdown": "^0.8.10",
+        "vee-validate": "^4.12.8",
+        "vue": "^3.4.21",
+        "vue-draggable-next": "^2.2.1",
+        "vue-sonner": "^1.1.2",
+        "vue3-emoji-picker": "^1.1.8",
+        "zod": "^3.23.8"
+    },
+    "devDependencies": {
+        "@types/node": "^20.12.12",
+        "@vitejs/plugin-vue": "^5.0.4",
+        "autoprefixer": "^10.4.19",
+        "prettier": "^3.3.3",
+        "prettier-plugin-tailwindcss": "^0.6.8",
+        "tailwindcss": "^3.4.3",
+        "typescript": "~5.6.3",
+        "vite": "^5.2.0",
+        "vite-plugin-dts": "^4.3.0",
+        "vue-tsc": "~2.1.8"
+    }
+}
